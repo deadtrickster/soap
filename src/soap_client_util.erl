@@ -256,7 +256,7 @@ parse_mime(Message, Model, Http_status, Http_headers,
 
 parse_xml(Message, Model, Http_status, Http_headers, 
           Version, Ns, Handler, Attachments, HTTP_body) ->
-    try erlsom:parse_sax(Message, 
+    try erlsom:parse_sax(Message,
                          #p_state{model = Model, version = Version,
                                   soap_ns = Ns, state = start,
                                   handler = Handler},
@@ -356,8 +356,9 @@ xml_parser_cb({startElement, Ns, "Fault", _Prfx, _Attrs} = Event,
               #p_state{state = body,
                        version = Version,
                        namespaces = Namespaces,
+                       model = Model,
                        soap_ns = Ns} = S) ->
-    Start_state = soap_fault:parse_fault_start(Version),
+    Start_state = soap_fault:parse_fault_start(Version, Model),
     Fault_parser = fun soap_fault:parse_fault/3,
     S1 = parse_event(Fault_parser, startDocument, Namespaces, Start_state),
     %% the event that we just received from the sax parser is recycled

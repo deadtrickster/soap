@@ -12,3 +12,4 @@ rel/example_project
 *~
 logs
 rebar.lock
+.rebar3
