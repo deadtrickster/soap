@@ -32,7 +32,7 @@
                                                %% during construction of the 
                                                %% interface
     out_type :: [{string(), atom()}] | undefined | atom(), %% see above
-    fault_types :: [atom()]}).
+    fault_types :: [atom()] | undefined}).
 -type op() :: #op{}.
 
 -record(interface, {
